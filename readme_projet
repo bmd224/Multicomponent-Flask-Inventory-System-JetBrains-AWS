@@ -6,18 +6,16 @@ L’objectif est de faire une application de gestion d’inventaire composée de
 - Ajouter une **Gateway** (`gateway`) comme point d’entrée unique.
 - Mettre en place un **DAL** basé sur `shelve` pour la persistance.
 - Conteneuriser l’application avec **Docker**.
-- Déployer le projet sur **AWS** (ECR + ECS).
+- Déployer le projet sur **AWS** (ECR:Amazon Elastic Container Registry + ECS: Amazon Elastic Container Service).
 ## Architecture
 L’application est composée de deux services:
-- **`invsys`** : API Flask qui gère les items  
+- **`invsys`**: API Flask qui gère les items  
   - CRUD sur `/items` et `/items/<id>`  
   - Validation avec **Marshmallow**  
   - Stockage via **shelve**
-
 - **`gateway`** : API Gateway  
   - Routes `/items` et `/items/<id>`  
   - Redirige les requêtes vers `invsys`
-
 ## Rôle de docker-compose
 Le fichier **docker-compose.yaml** lance et connecte automatiquement les deux services.  
 Il construit les images, crée les conteneurs et met en place un réseau interne pour qu’ils puissent communiquer ensemble.
@@ -28,7 +26,6 @@ services:
     image: flask-app-gateway-img
     ports:
       - "5001:5001"
-
   invsys:
     build: invsys
     container_name: flask-app-invsys
@@ -41,6 +38,5 @@ Le déploiement met automatiquement en place toutes les ressources nécessaires 
 - **Application Load Balancer** (exposition publique du service `gateway`)
 - **VPC + Subnets + Security Groups** (réseau et sécurité)
 - **CloudWatch Logs** (monitoring, logs et suivi des conteneurs)
-Les conteneurs ont été configurés pour communiquer entre eux via le réseau interne ECS, où le service `gateway` appelle `invsys` directement par son nom de service.  
-Les variables d'environnement, secrets et endpoints AWS ont été ajoutés dans la configuration du service afin de permettre un fonctionnement autonome dans le cloud.
+Les conteneurs ont été configurés pour communiquer entre eux via le réseau interne ECS, où le service `gateway` appelle `invsys` directement par son nom de service.
 L’environnement AWS pour ce projet est entièrement fonctionnel. Les communications entre services (gateway, invsys), l’exécution des conteneurs, et l’exposition publique via le Load Balancer ont été validés
