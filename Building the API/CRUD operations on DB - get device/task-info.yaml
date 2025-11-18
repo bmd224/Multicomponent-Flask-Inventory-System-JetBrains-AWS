@@ -1,0 +1,61 @@
+type: edu
+files:
+  - name: dal.py
+    visible: true
+    placeholders:
+      - offset: 842
+        length: 177
+        placeholder_text: "# TODO: return None if the id is not found in the database"
+        initial_state:
+          length: 58
+          offset: 842
+        initialized_from_dependency: false
+        encrypted_possible_answer: dOe8R7Cp8zHSG+T5iPDK3kz1vkZ4/fw7o9FxApWYlAp50UC89dMsBbJkGyWeN/6w+JSGmhW0osfi96qQvqRWgA==
+        selected: true
+        status: Solved
+      - offset: 1035
+        length: 17
+        placeholder_text: '"Return the device from the database accessed by the id"'
+        initial_state:
+          length: 56
+          offset: 916
+        initialized_from_dependency: false
+        encrypted_possible_answer: mg2KxGBSPqfZopFBr/LZ8vIOy5B0/CqDXPd0rwsRGhY=
+        selected: true
+        status: Solved
+    learner_created: false
+  - name: __init__.py
+    visible: false
+    learner_created: false
+  - name: api.py
+    visible: true
+    placeholders:
+      - offset: 1000
+        length: 246
+        placeholder_text: device = devices.get(identifier)
+        initial_state:
+          length: 32
+          offset: 1000
+        initialized_from_dependency: false
+        encrypted_possible_answer: xWAQDqsdWCabxC8jd+f1Ymz7QTcBND5o4wJ9guupaGBxrUQcaTgtUsUXT95jm1y+
+        selected: true
+        status: Solved
+    learner_created: false
+  - name: tests/__init__.py
+    visible: false
+    learner_created: false
+  - name: tests/api_test.py
+    visible: false
+    learner_created: false
+  - name: tests/test_task.py
+    visible: false
+    learner_created: false
+  - name: storage
+    visible: true
+    is_binary: true
+    learner_created: true
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 13 Nov 2025 14:20:23 UTC"
+record: -1

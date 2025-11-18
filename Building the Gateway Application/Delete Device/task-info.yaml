@@ -1,0 +1,73 @@
+type: edu
+files:
+  - name: gateway/application.py
+    visible: true
+    placeholders:
+      - offset: 844
+        length: 54
+        placeholder_text: "# TODO"
+        initial_state:
+          length: 6
+          offset: 844
+        initialized_from_dependency: false
+        encrypted_possible_answer: P32C6VWkevI8wN+D12RpIEPR7W98XbHoUdyKlMJ9I4jQ9HGKQtujedbYk8+u43qCW43ljaLMO+myyw7Awwpacw==
+        selected: false
+        status: Solved
+      - offset: 957
+        length: 48
+        placeholder_text: "# TODO"
+        initial_state:
+          length: 6
+          offset: 909
+        initialized_from_dependency: false
+        encrypted_possible_answer: bOxrT7jh+aaaVjxpO5rq8OkleSX35Q6J8SH9zDL1CUWtUCLmChN11XS86mn76LHTf9DvpaE5QhmhQPLf+O/DZg==
+        selected: true
+        status: Solved
+    learner_created: false
+  - name: __init__.py
+    visible: false
+    learner_created: false
+  - name: tests/__init__.py
+    visible: false
+    learner_created: false
+  - name: gateway/__init__.py
+    visible: false
+    learner_created: false
+  - name: invsys/requirements.txt
+    visible: true
+    learner_created: false
+  - name: gateway/requirements.txt
+    visible: false
+    learner_created: false
+  - name: invsys/dal.py
+    visible: true
+    learner_created: false
+  - name: gateway/Dockerfile
+    visible: false
+    learner_created: false
+  - name: invsys/Dockerfile
+    visible: true
+    learner_created: false
+  - name: invsys/__init__.py
+    visible: false
+    learner_created: false
+  - name: invsys/api.py
+    visible: true
+    learner_created: false
+  - name: runConfigurations/Delete_Device_Test.run.xml
+    visible: false
+    learner_created: false
+  - name: tests/test_task.py
+    visible: false
+    learner_created: false
+  - name: docker-compose.yaml
+    visible: false
+    learner_created: false
+  - name: buildConfigurations/Delete_Device_Build.run.xml
+    visible: false
+    learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 13 Nov 2025 17:37:05 UTC"
+record: -1

@@ -1,0 +1,76 @@
+from flask import Flask, request, jsonify
+from marshmallow import Schema, fields, ValidationError, validates_schema
+import dal
+
+app = Flask(__name__)
+
+
+# Define Marshmallow Schema for request and response validation
+class DeviceSchema(Schema):
+    id = fields.Str(required=True)
+    name = fields.Str(required=True)
+    location = fields.Str(required=True)
+    status = fields.Str(required=True)
+
+    #Use validates_schema for custom validation logic
+    @validates_schema(pass_original=True)
+    def validate_required_fields(self, data, original_data, **kwargs):
+        required_fields = ['id', 'name', 'location', 'status']
+        if request.method == 'POST':
+            for field in required_fields:
+                if field not in original_data:
+                    raise ValidationError(f'{field} is required.', field)
+
+
+device_schema = DeviceSchema()
+
+@app.route('/items/<string:identifier>', methods=['GET', 'PUT', 'DELETE'])
+def device(identifier):
+    if request.method == 'GET':
+        device = dal.devices.get(identifier)
+        if not device:
+            return jsonify({'message': 'Device not found'}), 404
+        return jsonify(device), 200
+
+    elif request.method == 'PUT':
+        try:
+            args = device_schema.load(request.json, partial=True)
+        except ValidationError as err:
+            return jsonify(err.messages), 400
+
+        if identifier not in dal.devices:
+            return jsonify({'message': 'Device not found'}), 404
+
+        dal.devices[identifier].update(args)
+        return jsonify({"updated device": identifier}), 200
+
+    elif request.method == 'DELETE':
+        if identifier not in dal.devices:
+            return jsonify({'message': 'Device not found'}), 404
+        del dal.devices[identifier]
+        return jsonify({'message': 'Device deleted'}), 200
+
+
+@app.route('/items', methods=['GET', 'POST'])
+def device_inventory():
+    if request.method == 'GET':
+        devices_dict = dal.get()
+        return jsonify({"items": devices_dict}), 200
+
+    elif request.method == 'POST':
+        try:
+            new_device = device_schema.load(request.json)
+        except ValidationError as err:
+            return jsonify(err.messages), 400
+
+        result = dal.post(new_device)
+
+        # handle the case where the ID already exists
+        if "error" in result:
+            return jsonify(result), 400
+
+        # success response with status code 201
+        return jsonify({"Posted a device": result}), 201
+
+if __name__ == "__main__":
+    app.run("0.0.0.0", port=5000, debug=True)
